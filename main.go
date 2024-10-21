@@ -24,8 +24,8 @@ func createFile(filename string) (*os.File, error) {
 }
 
 func fileUploadHandler(w http.ResponseWriter, r *http.Request) {
-	// Limit file size to 10MB
-	r.ParseMultipartForm()
+	// Limit file size to 10MB | 1 << 20 = 1MB
+	r.ParseMultipartForm(10 << 20)
 
 	// Retrieve the file from the form data
 	file, handler, err := r.FormFile("file")
